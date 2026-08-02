@@ -18,7 +18,7 @@ const (
 	requestPath = "/api/v3/trade/place-order"
 	// Hedge-mode open long. ~63 USDT available after spot-selling 0.001 BTC.
 	// requestBody = `{"category":"USDT-FUTURES","symbol":"BTCUSDT","orderType":"limit","qty":"0.005","price":"50000","side":"buy","posSide":"long","timeInForce":"gtc","reduceOnly":"no"}`
-	requestBody = `{"category":"SPOT","symbol":"BTCUSDT","orderType":"limit","qty":"0.001","price":"50000","side":"buy", "timeInForce":"gtc"}`
+	requestBody = `{"category":"SPOT","symbol":"BTCUSDT","orderType":"limit","qty":"0.001","price":"50000","side":"buy", "timeInForce":"gtc", "clientOid":"1234567890"}`
 )
 
 func Run() {
