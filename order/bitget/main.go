@@ -1,6 +1,7 @@
 package bitget
 
 import (
+	"bytes"
 	"fmt"
 	"io"
 	"net/http"
@@ -14,7 +15,8 @@ import (
 
 const (
 	baseURL     = "https://api.bitget.com"
-	requestPath = "/api/v3/account/settings"
+	requestPath = "/api/v3/trade/place-order"
+	requestBody = `{"category":"SPOT","symbol":"BGBUSDT","orderType":"limit","qty":"123","price":"1.11","side":"buy","posSide":"long","timeInForce":"gtc","reduceOnly":"no"}`
 )
 
 func Run() {
@@ -25,9 +27,9 @@ func Run() {
 	passphrase := os.Getenv("BITGET_PASSPHRASE")
 
 	timestamp := strconv.FormatInt(time.Now().UnixMilli(), 10)
-	signature := bgsign.Sign(secretKey, timestamp, "GET", requestPath, "")
+	signature := bgsign.Sign(secretKey, timestamp, "POST", requestPath, requestBody)
 
-	req, err := http.NewRequest(http.MethodGet, baseURL+requestPath, nil)
+	req, err := http.NewRequest(http.MethodPost, baseURL+requestPath, bytes.NewReader([]byte(requestBody)))
 	if err != nil {
 		panic(err)
 	}

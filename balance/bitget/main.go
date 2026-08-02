@@ -1,36 +1,32 @@
-package main
+package bitget
 
 import (
-	"crypto/hmac"
-	"crypto/sha256"
-	"encoding/base64"
 	"fmt"
 	"io"
 	"net/http"
+	"os"
 	"strconv"
 	"time"
+
+	"order-maker/internal/bgsign"
+	"order-maker/internal/env"
 )
 
 const (
-	apiKey     = ""
-	secretKey  = ""
-	passphrase = ""
-
 	baseURL     = "https://api.bitget.com"
 	requestPath = "/api/v3/p2p/balance"
 	queryString = "token=USDT"
 )
 
-func sign(timestamp, method, requestPath, queryString, body string) string {
-	message := timestamp + method + requestPath + "?" + queryString + body
-	mac := hmac.New(sha256.New, []byte(secretKey))
-	mac.Write([]byte(message))
-	return base64.StdEncoding.EncodeToString(mac.Sum(nil))
-}
+func Run() {
+	env.Load()
 
-func main() {
+	apiKey := os.Getenv("BITGET_API_KEY")
+	secretKey := os.Getenv("BITGET_SECRET_KEY")
+	passphrase := os.Getenv("BITGET_PASSPHRASE")
+
 	timestamp := strconv.FormatInt(time.Now().UnixMilli(), 10)
-	signature := sign(timestamp, "GET", requestPath, queryString, "")
+	signature := bgsign.Sign(secretKey, timestamp, "GET", requestPath+"?"+queryString, "")
 
 	url := baseURL + requestPath + "?" + queryString
 

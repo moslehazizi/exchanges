@@ -1,3 +1,7 @@
-package main
+package nobitex
 
-// We use API key to connect to Nobitex apis.
+import "fmt"
+
+func Run() {
+	fmt.Println("auth nobitex: not implemented yet")
+}

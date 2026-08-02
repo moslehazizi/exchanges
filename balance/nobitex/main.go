@@ -1,4 +1,4 @@
-package main
+package nobitex
 
 import (
 	"bytes"
@@ -10,6 +10,8 @@ import (
 	"os"
 	"strconv"
 	"time"
+
+	"order-maker/internal/env"
 )
 
 func decodeURLBase64(s string) ([]byte, error) {
@@ -19,7 +21,9 @@ func decodeURLBase64(s string) ([]byte, error) {
 	return base64.RawURLEncoding.DecodeString(s)
 }
 
-func main() {
+func Run() {
+	env.Load()
+
 	publicKey := os.Getenv("NOBITEX_KEY")
 	privateKeyB64 := os.Getenv("NOBITEX_PRIVATE_KEY")
 	if publicKey == "" || privateKeyB64 == "" {
