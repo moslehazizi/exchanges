@@ -16,7 +16,7 @@ import (
 const (
 	baseURL     = "https://api.bitget.com"
 	requestPath = "/api/v3/trade/place-order"
-	requestBody = `{"category":"SPOT","symbol":"BGBUSDT","orderType":"limit","qty":"123","price":"1.11","side":"buy","posSide":"long","timeInForce":"gtc","reduceOnly":"no"}`
+	requestBody = `{"category":"USDT-FUTURES","symbol":"BTCUSTD","orderType":"limit","qty":"5","price":"10","side":"buy","posSide":"long","timeInForce":"gtc","reduceOnly":"no"}`
 )
 
 func Run() {

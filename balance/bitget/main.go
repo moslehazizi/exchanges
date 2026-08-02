@@ -14,8 +14,7 @@ import (
 
 const (
 	baseURL     = "https://api.bitget.com"
-	requestPath = "/api/v3/p2p/balance"
-	queryString = "token=USDT"
+	requestPath = "/api/v3/account/assets"
 )
 
 func Run() {
@@ -26,9 +25,9 @@ func Run() {
 	passphrase := os.Getenv("BITGET_PASSPHRASE")
 
 	timestamp := strconv.FormatInt(time.Now().UnixMilli(), 10)
-	signature := bgsign.Sign(secretKey, timestamp, "GET", requestPath+"?"+queryString, "")
+	signature := bgsign.Sign(secretKey, timestamp, "GET", requestPath, "")
 
-	url := baseURL + requestPath + "?" + queryString
+	url := baseURL + requestPath
 
 	req, err := http.NewRequest(http.MethodGet, url, nil)
 	if err != nil {
