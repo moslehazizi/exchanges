@@ -16,7 +16,9 @@ import (
 const (
 	baseURL     = "https://api.bitget.com"
 	requestPath = "/api/v3/trade/place-order"
-	requestBody = `{"category":"USDT-FUTURES","symbol":"BTCUSTD","orderType":"limit","qty":"5","price":"10","side":"buy","posSide":"long","timeInForce":"gtc","reduceOnly":"no"}`
+	// Hedge-mode open long. ~63 USDT available after spot-selling 0.001 BTC.
+	// requestBody = `{"category":"USDT-FUTURES","symbol":"BTCUSDT","orderType":"limit","qty":"0.005","price":"50000","side":"buy","posSide":"long","timeInForce":"gtc","reduceOnly":"no"}`
+	requestBody = `{"category":"SPOT","symbol":"BTCUSDT","orderType":"limit","qty":"0.001","price":"50000","side":"buy", "timeInForce":"gtc"}`
 )
 
 func Run() {
