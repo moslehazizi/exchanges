@@ -15,6 +15,9 @@ import (
 	orderbitgethistory "order-maker/order/bitget/history"
 	orderbitgetlist "order-maker/order/bitget/list"
 	orderbitgetplace "order-maker/order/bitget/place"
+	websocketbitgetaccount "order-maker/web-socket/bitget/account"
+	websocketbitgetorder "order-maker/web-socket/bitget/order"
+
 )
 
 func main() {
@@ -57,6 +60,16 @@ func main() {
 		Run: func(cmd *cobra.Command, args []string) { orderbitgetcancel.Run() },
 	})
 
+	websocketCmd := &cobra.Command{Use: "websocket"}
+	websocketCmd.AddCommand(&cobra.Command{
+		Use: "bitgetaccount",
+		Run: func(cmd *cobra.Command, args []string) { websocketbitgetaccount.Run() },
+	})
+	websocketCmd.AddCommand(&cobra.Command{
+		Use: "bitgetorder",
+		Run: func(cmd *cobra.Command, args []string) { websocketbitgetorder.Run() },
+	})
+
 	authCmd := &cobra.Command{Use: "auth"}
 	authCmd.AddCommand(&cobra.Command{
 		Use: "bitpin",
@@ -67,7 +80,7 @@ func main() {
 		Run: func(cmd *cobra.Command, args []string) { authnobitex.Run() },
 	})
 
-	root.AddCommand(accountCmd, balanceCmd, orderCmd, authCmd)
+	root.AddCommand(accountCmd, balanceCmd, orderCmd, websocketCmd, authCmd)
 
 	if err := root.Execute(); err != nil {
 		fmt.Fprintln(os.Stderr, err)

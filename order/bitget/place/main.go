@@ -19,7 +19,7 @@ const (
 	// Hedge-mode open long. ~63 USDT available after spot-selling 0.001 BTC.
 	// requestBody = `{"category":"USDT-FUTURES","symbol":"BTCUSDT","orderType":"limit","qty":"0.0001","price":"64000","side":"buy","posSide":"long","timeInForce":"gtc","reduceOnly":"no","clientOid":"1234567890" }`
 	// requestBody = `{"category":"SPOT","symbol":"BTCUSDT","orderType":"limit","qty":"0.0001","price":"64000","side":"buy", "timeInForce":"gtc", "clientOid":"1234567890"}`
-	requestBody = `{"category":"SPOT","symbol":"BTCUSDT","orderType":"market","qty":"2","side":"buy","posSide":"long","timeInForce":"gtc","reduceOnly":"no","clientOid":"1234567890" }`
+	requestBody = `{"category":"SPOT","symbol":"BTCUSDT","orderType":"market","qty":"2","side":"buy","timeInForce":"gtc","clientOid":"1234567890"}`
 )
 
 func Run() {
